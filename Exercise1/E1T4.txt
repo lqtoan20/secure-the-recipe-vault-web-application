@@ -1,0 +1,16 @@
+# Poor practice 1
+For the VPC configuration, all the route definitions have DestinationCidrBlock defined as 0.0.0.0/0.
+In case there is a breach into the resource in the subnet configured within this routing table,
+attacker has an option to transfer information to any IP address within VPC or outside of it.
+
+# Poor practice 2
+IAM Role has full access to any s3 bucket instance. This behavior make Violation of the
+least privilege principle. This role should only have access to specific buckets and allow only necessary actions.
+Allowing full access would expose a vulnarability to change content in any S3 bucket of AWS account
+
+# Poor practice 3
+Based on a EC2 instance in diagram provider, IAM Role (InstanceRole) is assigned
+to both WebServiceInstance and AttackInstanceSG instance. Again, This behavior make Violation of the
+least privilege principle, the access to s3 bucket resources for
+these two instances has to specified by a separate roles with appropriate permissions needed for
+specific buckets

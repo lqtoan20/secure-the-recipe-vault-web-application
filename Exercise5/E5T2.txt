@@ -1,0 +1,18 @@
+1. Scan AMI’s or containers for OS vulnerabilities. 
++ Clair (https://github.com/quay/clair)
+--> Exposes the use of an insecure container image that contains a known vulnerability.
++ Amazon Inspector
+--> Exposes a vulnerability in an EC2 instance due to an outdated operating system.
+
+2. Scan infrastructure as code templates
++ Regula: https://github.com/fugue/regula
+--> Compliance violations: S3 and EBS not encrypted
++ Terraform Compliance: https://terraform-compliance.com/
+--> Exposes an S3 bucket policy that allows public read access to sensitive data
++ Checkov: https://github.com/bridgecrewio/checkov
+--> Exposes the use of default AWS credentials in Terraform configuration files.
+
+3. Scan an AWS environment for cloud configuration vulnerabilities
++ AWS Config: https://aws.amazon.com/config/
+--> Exposes an EC2 instance that is not encrypted at rest, which violates compliance with PCI-DSS.
+
