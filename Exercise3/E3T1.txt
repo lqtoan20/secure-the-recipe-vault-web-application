@@ -1,14 +1,21 @@
 1.What findings were detected related to the brute force attack?
 + UnauthorizedAccess:EC2/SSHBruteForce - High
-i-0cc1701a8f2ce2584 is performing SSH brute force attacks against 10.192.10.137
+Message: i-0cc1701a8f2ce2584 is performing SSH brute force attacks against 10.192.10.137
+Brute force attacks are used to gain unauthorized access to your instance by guessing the SSH password
 
 + UnauthorizedAccess:EC2/SSHBruteForce - Low
-10.192.11.13 is performing SSH brute force attacks against i-031e194296583b502.
-Brute force attacks are used to gain unauthorized access to your instance by guessing the SSH password.
+Message: 10.192.11.13 is performing SSH brute force attacks against i-031e194296583b502.
+Brute force attacks are used to gain unauthorized access to your instance by guessing the SSH password
+
+This finding is generated only through GuardDuty monitoring traffic on port 22.
+If your SSH services are configured to use other ports, this finding is not generated.
 
 2. Research the AWS Guard Duty documentation page and explain how GuardDuty may have detected this attack - i.e. what was its source of information
 ** Documentation **
-GuardDuty continuously monitors and analyzes AWS account activity, network traffic, and other sources of data to identify potentially malicious behavior. It uses machine learning algorithms and threat intelligence feeds to identify known and unknown threats.
+GuardDuty continuously monitors and analyzes AWS account activity, network traffic, 
+and other sources of data to identify potentially malicious behavior. 
+It uses machine learning algorithms and threat intelligence feeds to identify known and unknown threats.
+VPC Flow Logs capture information about the IP traffic going to and from Amazon EC2 network interfaces in your VPC
 
 Some of the ways in which GuardDuty may detect an attack include:
 + Unauthorized access: GuardDuty may detect unauthorized access attempts, such as when an attacker uses stolen credentials to log in to an AWS account. It may also detect brute-force attacks, where an attacker attempts to guess passwords or access keys.
@@ -18,9 +25,6 @@ Some of the ways in which GuardDuty may detect an attack include:
 + Suspicious activity: GuardDuty may detect suspicious activity that does not fit the normal usage patterns of an AWS account, such as unusual API calls or unusual amounts of data being transferred.
 + Overall, GuardDuty is a powerful tool for detecting and responding to security threats in AWS environments. It can help identify and remediate potential security issues before they become full-blown attacks, and can help improve the overall security posture of an organization's AWS infrastructure.
 
+The logs will show a large amount of requests being sent from the one instance to a specific IP indicating that the instance is being used for an SSH brute force attack
 
-This finding informs that an EC2 instance in your AWS environment was involved in a brute force attack aimed at obtaining passwords to SSH services on Linux-based systems. 
-This can indicate unauthorized access to your AWS resources.
-
-This finding is generated only through monitoring traffic on port 22. 
-If your SSH services are configured to use other ports, this finding is not generated.
+Reference : https://docs.aws.amazon.com/guardduty/latest/ug/what-is-guardduty.html 
